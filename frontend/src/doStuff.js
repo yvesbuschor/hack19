@@ -90,6 +90,25 @@ export async function addComment(data, ideaid, dispatch) {
     dispatch(action);
 }
 
+export async function getComment(commentid, dispatch){
+    let action = {
+        type: 'comment.fetch'
+    }
+    dispatch(action);
+    const comment = await db.getComment(commentid);
+    if(comment !== null){
+        action = {
+            type: 'comment.changed',
+            comment: comment
+        }
+    } else {
+        action = {
+            type: 'comment.failed'
+        }
+    }
+    dispatch(action);
+}
+
 export async function fetchLocations(dispatch){
     let action = {
         type: 'location.fetch'
@@ -139,7 +158,7 @@ export async function downvote(data, dispatch){
   dispatch(action);
   const newData = {
     ...data,
-    upvotes: data.upvotes - 1
+    downvotes: data.downvotes + 1
   }
   const updated = await db.updateEntity(newData);
   if(updated){

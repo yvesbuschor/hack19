@@ -88,6 +88,18 @@ export async function getComments(idea_id){
     }
 }
 
+export async function getComment(comment_id){
+    try {
+        const response = await instance.get('/comment/' + comment_id);
+        if(response.status === 200){
+            return response.data;
+        }
+        return null;
+    } catch(error){
+        console.error(error);
+    }
+}
+
 export async function createLocation(data){
     try {
         const response = await instance.post('/location', data);
