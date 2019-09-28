@@ -19,7 +19,7 @@ import BottomNav from 'Components/BottomNav';
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <StateProvider initialState={} reducer={reducer}>
+      <StateProvider initialState={{}} reducer={reducer}>
         <CssBaseline />
         <Router>
           <BottomNav
