@@ -38,20 +38,24 @@ export async function fetchIdeasByLocation(locationid, dispatch) {
     dispatch(action);
 }
 
-export async function createIdea(idea, location, dispatch){
+export async function createIdea(idea, existingLocationID, location, dispatch){
     let action = {
         type: 'idea.save'
     }
     dispatch(action);
-    const newLocation = await db.createLocation(location);
+    let locationId = existingLocationID;
     let newIdea = null;
-    if(newLocation !== null){
+
+    if (!locationId && location) {
+        const newLocation = await db.createLocation(location);
+        locationId = newLocation._id;
+    }
+    if(locationId){
         idea = {
             ...idea,
-            location_id: newLocation._id
+            location_id: locationId
         }
         newIdea = db.createIdea(idea);
-    
     }
     
     if(newIdea !== null){
