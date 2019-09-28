@@ -7,7 +7,7 @@ const instance = axios.create({
 });
 
 
-async function createIdea(data){
+export async function createIdea(data){
     try {
         const response = await instance.post('/idea', data);
         if(response.status === 200){
@@ -15,11 +15,11 @@ async function createIdea(data){
         }
         return null;
     } catch (error){
-        consol.error(error);
+        console.error(error);
     }
 }
 
-async function getIdea(idea_id){
+export async function getIdea(idea_id){
     try {
         const response = await instance.get('/idea/' + idea_id);
         if(response.status === 200){
@@ -27,11 +27,11 @@ async function getIdea(idea_id){
         }
         return null;
     } catch (error){
-        consol.error(error);
+        console.error(error);
     }
 }
 
-async function getIdeas(){
+export async function getIdeas(){
     try {
         const response = await instance.get('/idea');
         if(response.status === 200){
@@ -39,11 +39,11 @@ async function getIdeas(){
         }
         return null;
     } catch (error){
-        consol.error(error);
+        console.error(error);
     }
 }
 
-async function getIdeas(location_id){
+export async function getIdeasByLocation(location_id){
     try {
         const response = await instance.get('/idea?q=location-id:=' + location_id);
         if(response.status === 200){
@@ -51,20 +51,20 @@ async function getIdeas(location_id){
         }
         return null;
     } catch (error){
-        consol.error(error);
+        console.error(error);
     }
 }
 
-async function deleteIdea(idea_id){
+export async function deleteIdea(idea_id){
     try {
         const response = await instance.delete('/idea/' + idea_id);
         return response.status === 200
     } catch (error){
-        consol.error(error);
+        console.error(error);
     }
 }
 
-async function addComment(idea_id, data){
+export async function addComment(idea_id, data){
     try {
         const response = await instance.post('/comment', data);
         return response.status === 200;;
@@ -73,7 +73,7 @@ async function addComment(idea_id, data){
     }
 }
 
-async function getComments(idea_id){
+export async function getComments(idea_id){
     try {
         const response = await instance.get('/comment?q=idea-id:=' + idea_id);
         if(response.status === 200){
@@ -85,7 +85,7 @@ async function getComments(idea_id){
     }
 }
 
-async function createLocation(data){
+export async function createLocation(data){
     try {
         const response = await instance.post('/location', data);
         if(response.status === 200){
@@ -97,7 +97,7 @@ async function createLocation(data){
     }
 }
 
-async function getLocations(){
+export async function getLocations(){
     try {
         const response = await instance.get('/location');
         if(response.status === 200){ 

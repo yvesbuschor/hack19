@@ -1,7 +1,7 @@
-import db from 'databaseAdapter';
+import * as db from 'databaseAdapter';
 
-function fetchIdeas(dispatch) {
-    const action  = {
+export function fetchIdeas(dispatch) {
+    let action  = {
         type: 'idea.fetching',
     };
     dispatch(action);
@@ -16,15 +16,15 @@ function fetchIdeas(dispatch) {
             type: 'idea.failed'
         }
     }
-    dispach(action);
+    dispatch(action);
 }
 
-function fetchIdeas(locationid, dispatch) {
-    const action  = {
+export function fetchIdeasByLocation(locationid, dispatch) {
+    let action  = {
         type: 'idea.fetching',
     };
     dispatch(action);
-    const ideas = db.getIdeas(locationid);
+    const ideas = db.getIdeasByLocation(locationid);
     if(ideas !== null){
         action = {
             type: 'idea.changed',
@@ -35,17 +35,16 @@ function fetchIdeas(locationid, dispatch) {
             type: 'idea.failed'
         }
     }
-    dispach(action);
+    dispatch(action);
 }
 
-function createIdea(idea, location, dispatch){
-    const action = {
+export function createIdea(idea, location, dispatch){
+    let action = {
         type: 'idea.save'
     }
     dispatch(action);
-    const failed = false;
     const newLocation = db.createLocation(location);
-    const newIdea = null;
+    let newIdea = null;
     if(newLocation !== null){
         idea = {
             ...idea,
@@ -68,8 +67,8 @@ function createIdea(idea, location, dispatch){
     dispatch(action);
 }
 
-function addComment(data, ideaid, dispatch) {
-    const action = {
+export function addComment(data, ideaid, dispatch) {
+    let action = {
         type: 'comment.save'
     };
     dispatch(action);
@@ -88,8 +87,8 @@ function addComment(data, ideaid, dispatch) {
     dispatch(action);
 }
 
-function fetchLocations(dispatch){
-    const action = {
+export function fetchLocations(dispatch){
+    let action = {
         type: 'location.fetch'
     }
     dispatch(action);
