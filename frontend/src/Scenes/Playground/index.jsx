@@ -4,9 +4,8 @@ import Button from '@material-ui/core/Button';
 import { useStateValue } from 'state';
 import { fetchIdeas } from 'doStuff';
 
-
 const PlaygroundView = (props) => {
-  const [{}, dispatch] = useStateValue();
+  const [{ idea }, dispatch] = useStateValue();
 
   return (
     <>
@@ -18,6 +17,9 @@ const PlaygroundView = (props) => {
       >
         Ping Pong
       </Button>
+      <ul>
+        { idea && idea.data && idea.data.map(item => <li key={item._id}>{item.title}, {item.author}</li>) }
+      </ul>
     </>
   );
 }
