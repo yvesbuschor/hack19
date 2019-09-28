@@ -1,9 +1,10 @@
-const mainReducer = ({ idea, location, comment }, action) => {
+const mainReducer = ({idea, location, comment, create}, action) => {
   // middleware goes here, i.e calling analytics service, etc.
   return {
     idea: ideaReducer(idea, action),
     location: locationReducer(location, action),
-    comment: commentReducer(comment, action)
+    comment: commentReducer(comment, action),
+    create: createReducer(create, action),
   };
 };
 
@@ -95,6 +96,37 @@ const locationReducer = (state, action) => {
       };
     
     case 'location.failed':
+      return {
+        ...state,
+        status: 'fail'
+      };
+    default:
+      return state;
+  }
+};
+
+const createReducer = (state, action) => {
+  switch (action.type) {
+    case 'create.dataUpdated':
+      return {
+        ...state,
+        data: {...state.data, ...action.data},
+      };
+    
+    case 'create.submit':
+      return {
+        ...state,
+        status: 'pending'
+      };
+      
+    case 'create.success':
+      return {
+        ...state,
+        status: 'done',
+        data: {},
+      };
+    
+    case 'create.failed':
       return {
         ...state,
         status: 'fail'
