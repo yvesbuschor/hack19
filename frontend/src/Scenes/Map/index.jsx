@@ -3,6 +3,7 @@ import Map from 'pigeon-maps'
 import Marker from 'pigeon-marker'
 import './map.css'
 
+import FloatingActionButtons from 'Components/FAB';
 
 import { useStateValue } from 'state';
 import { fetchLocations } from 'doStuff';
@@ -62,6 +63,7 @@ const MapScene = (props) => {
             )
           }
         </Map>
+        <FloatingActionButtons />
         <div className={selectedPlace !== null ? "place-info shown " : "place-info"}>
           <b>{selectedPlace ? selectedPlace.name : ' '}</b>
         </div>

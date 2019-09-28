@@ -15,8 +15,6 @@ import MapScene from 'Scenes/Map';
 import IdeaDetailScene from 'Scenes/IdeaDetail';
 import IdeaSubmitScene from 'Scenes/IdeaSubmit';
 
-import FloatingActionButtons from 'Components/FAB';
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -28,7 +26,6 @@ function App() {
           <Route path={routes.playground} component={PlaygroundScene}/>
           <Route path={routes.ideaDetail} component={IdeaDetailScene}/>
           <Route path={routes.ideaSubmit} component={IdeaSubmitScene}/>
-          <FloatingActionButtons />
         </Router>
       </StateProvider>
     </ThemeProvider>
