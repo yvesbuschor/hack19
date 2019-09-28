@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     width: '90%',
     display: 'flex',
     flexDirection: 'row',
+    marginBottom: '20px',
   },
   cardContent: {
     paddingTop: '8px',
@@ -41,7 +42,7 @@ const IdeaCard = ({ idea }) => {
 
   return (
     <Card className={classes.card}>
-      <CardContent className={classes.cardContent}>
+      <CardContent className={classes.cardContent} onClick={() => {console.log('#YOLO')}}>
         <div className={classes.title}>
           {idea.title}
         </div>

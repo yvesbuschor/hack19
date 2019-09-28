@@ -14,12 +14,14 @@
 }
 
 .place-info.shown-little {
-  transform: translateY(80vh);
+  transform: translateY(calc(100% - 62px));
 }
 
 .transition-body {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: auto;
 }
 
 .place-add {
@@ -35,4 +37,11 @@
 
 .place-add.shown {
   transform: translateY(80vh);
+}
+
+.location {
+  font-weight: bold;
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-bottom: 27px;
 }

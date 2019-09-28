@@ -6,6 +6,7 @@ import './map.css'
 import FloatingActionButtons from 'Components/FAB';
 import TransitionBar from 'Components/TransitionBar';
 import IdeaCard from 'Components/IdeaCard';
+import LocationCard from 'Components/LocationCard';
 
 import { useStateValue } from 'state';
 import { fetchLocations, fetchIdeas } from 'doStuff';
@@ -95,8 +96,9 @@ const MapScene = (props) => {
         <div className={show(showContent)}>
           <TransitionBar onClick={() => handleTransitionBarClick() }/> 
           <div className={"transition-body"}>
-          {console.log(state)}
+          <p className={"location"}>{selectedPlace.name}</p>
           { state.idea.data.filter((idea) => { return idea.location_id === selectedPlace._id })
+          .sort((left, right) => { return left._createdOn < right._createdOn})
           .map((idea) => { return <IdeaCard key={idea._id} idea={idea}/>})}
           </div>
         </div>
