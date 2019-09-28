@@ -43,17 +43,19 @@ const ideaReducer = (state, action) => {
 
 const commentReducer = (state, action) => {
   switch (action.type) {
+    case 'comment.update':
     case 'comment.save':
       return {
         ...state,
         status: 'pending'
       };
     
+    case 'comment.changed':
     case 'comment.saved':
       return {
         ...state,
         status: 'done',
-        data: action.ideas
+        data: action.comment
       };
     
     case 'comment.failed':

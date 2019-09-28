@@ -2,10 +2,11 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 import { useStateValue } from 'state';
-import { addComment } from 'doStuff';
+import { upvote } from 'doStuff';
 
 const PlaygroundView = (props) => {
-  const [{ idea }, dispatch] = useStateValue();
+  const [state, dispatch] = useStateValue();
+  console.log({state});
 
   return (
     <>
@@ -13,19 +14,18 @@ const PlaygroundView = (props) => {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => addComment(
+        onClick={() => upvote(
             {
+              "_id": "5d8f7714586bc10017c85f6b",
               "comment": "I feel the same",
               "user": "Livio",
               "upvotes": 0,
-              "downvotes": 1
-            },
-            '5d8f6d1a586bc10017c85f69', dispatch)}>
+              "downvotes": 1,
+              "idea_id": "5d8f6d1a586bc10017c85f69",
+              "_createdOn": "2019-09-28T15:07:00.916Z"
+            }, dispatch)}>
         Ping Pong
       </Button>
-      <ul>
-        { idea && idea.data && idea.data.map(item => <li key={item._id}>{item.title}, {item.author}</li>) }
-      </ul>
     </>
   );
 }

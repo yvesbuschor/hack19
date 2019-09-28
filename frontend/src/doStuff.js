@@ -7,10 +7,10 @@ export async function fetchIdeas(dispatch) {
     dispatch(action);
     const ideas = await db.getIdeas();
     if(ideas !== null){
-        action = {
-            type: 'idea.changed',
-            ideas: ideas
-        };
+      action = {
+          type: 'idea.changed',
+          ideas: ideas
+      };
     } else {
         action = {
             type: 'idea.failed'
@@ -76,12 +76,11 @@ export async function addComment(data, ideaid, dispatch) {
       ...data,
       idea_id: ideaid
     };
-    const saved = await db.addComment(data);
-    if(saved){
-        const ideas = db.getIdeas();
+    const comment = await db.addComment(data);
+    if(comment !== null){
         action = {
             type: 'comment.saved',
-            ideas: ideas
+            comment: comment
         };  
     } else {
         action = {
@@ -108,4 +107,50 @@ export async function fetchLocations(dispatch){
         }
     }
     dispatch(action);
+}
+
+export async function upvote(data, dispatch){
+  let action = {
+    type: 'comment.update'
+  }
+  dispatch(action);
+  const newData = {
+    ...data,
+    upvotes: data.upvotes + 1
+  }
+  const updated = await db.updateEntity(newData);
+  if(updated){
+      action = {
+          type: 'comment.changed',
+          comment: newData
+      }
+  } else {
+      action = {
+          type: 'comment.failed'
+      }
+  }
+  dispatch(action);
+}
+
+export async function downvote(data, dispatch){
+  let action = {
+    type: 'comment.update'
+  }
+  dispatch(action);
+  const newData = {
+    ...data,
+    upvotes: data.upvotes - 1
+  }
+  const updated = await db.updateEntity(newData);
+  if(updated){
+      action = {
+          type: 'comment.changed',
+          comment: newData
+      }
+  } else {
+      action = {
+          type: 'comment.failed'
+      }
+  }
+  dispatch(action);
 }

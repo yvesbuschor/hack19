@@ -67,7 +67,10 @@ export async function deleteIdea(idea_id){
 export async function addComment(data){
     try {
         const response = await instance.post('/comment', data);
-        return response.status === 200;;
+        if(response.status === 200){
+            return response.data;
+        }
+        return null;
     } catch(error){
         console.error(error);
     }
@@ -104,6 +107,15 @@ export async function getLocations(){
             return response.data;
         }
         return null;
+    } catch (error){
+        console.error(error);
+    }
+}
+
+export async function updateEntity(data){
+    try {
+        const response = await instance.put(data._id, data);
+        return response.status === 200;
     } catch (error){
         console.error(error);
     }
