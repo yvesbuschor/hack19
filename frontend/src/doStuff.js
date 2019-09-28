@@ -19,12 +19,12 @@ export async function fetchIdeas(dispatch) {
     dispatch(action);
 }
 
-export function fetchIdeasByLocation(locationid, dispatch) {
+export async function fetchIdeasByLocation(locationid, dispatch) {
     let action  = {
         type: 'idea.fetching',
     };
     dispatch(action);
-    const ideas = db.getIdeasByLocation(locationid);
+    const ideas = await db.getIdeasByLocation(locationid);
     if(ideas !== null){
         action = {
             type: 'idea.changed',
@@ -38,12 +38,12 @@ export function fetchIdeasByLocation(locationid, dispatch) {
     dispatch(action);
 }
 
-export function createIdea(idea, location, dispatch){
+export async function createIdea(idea, location, dispatch){
     let action = {
         type: 'idea.save'
     }
     dispatch(action);
-    const newLocation = db.createLocation(location);
+    const newLocation = await db.createLocation(location);
     let newIdea = null;
     if(newLocation !== null){
         idea = {
@@ -67,12 +67,16 @@ export function createIdea(idea, location, dispatch){
     dispatch(action);
 }
 
-export function addComment(data, ideaid, dispatch) {
+export async function addComment(data, ideaid, dispatch) {
     let action = {
         type: 'comment.save'
     };
     dispatch(action);
-    const saved = db.addComment(ideaid, data);
+    data = {
+      ...data,
+      idea_id: ideaid
+    };
+    const saved = await db.addComment(data);
     if(saved){
         const ideas = db.getIdeas();
         action = {
@@ -87,12 +91,12 @@ export function addComment(data, ideaid, dispatch) {
     dispatch(action);
 }
 
-export function fetchLocations(dispatch){
+export async function fetchLocations(dispatch){
     let action = {
         type: 'location.fetch'
     }
     dispatch(action);
-    const locations = db.getLocations();
+    const locations = await db.getLocations();
     if(locations !== null){
         action = {
             type: 'location.changed',

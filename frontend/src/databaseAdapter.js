@@ -45,7 +45,7 @@ export async function getIdeas(){
 
 export async function getIdeasByLocation(location_id){
     try {
-        const response = await instance.get('/idea?q=location-id:=' + location_id);
+        const response = await instance.get('/idea' + decodeURI('?q=location_id:' + location_id));
         if(response.status === 200){
             return response.data;
         }
@@ -64,7 +64,7 @@ export async function deleteIdea(idea_id){
     }
 }
 
-export async function addComment(idea_id, data){
+export async function addComment(data){
     try {
         const response = await instance.post('/comment', data);
         return response.status === 200;;
@@ -75,7 +75,7 @@ export async function addComment(idea_id, data){
 
 export async function getComments(idea_id){
     try {
-        const response = await instance.get('/comment?q=idea-id:=' + idea_id);
+        const response = await instance.get('/comment?q=idea_id:' + idea_id);
         if(response.status === 200){
             return response.data;
         }
