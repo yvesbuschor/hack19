@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import reducer from 'reducer';
 
 import routes from 'routes';
 import theme from 'theme';
@@ -18,7 +19,7 @@ import BottomNav from 'Components/BottomNav';
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <StateProvider initialState={initialState} reducer={reducer}>
+      <StateProvider initialState={} reducer={reducer}>
         <CssBaseline />
         <Router>
           <BottomNav
