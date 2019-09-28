@@ -17,13 +17,12 @@ const useStyles = makeStyles({
   },
 });
 
-const BottomNav = ({ location, onChange }) => {
+const BottomNav = ({ location }) => {
   const classes = useStyles();
 
   return (
     <BottomNavigation
       value={location.pathname}
-      onChange={onChange}
       showLabels
       className={classes.root}
     >
