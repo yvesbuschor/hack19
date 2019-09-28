@@ -3,14 +3,36 @@
   bottom: 0;
   transform: translateY(100%);
   transition: .4s ease-in-out;
-  background: white;
-  height: 72px;
+  background: #00e676;
+  height: 90vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 15px 15px 0 0;
 }
 
 .place-info.shown {
   transform: translateY(0);
+}
+
+.place-info.shown-little {
+  transform: translateY(80vh);
+}
+
+.transition-body {
+  display: flex;
+  justify-content: center;
+}
+
+.place-add {
+  position: fixed;
+  bottom: 0;
+  transform: translateY(100%);
+  transition: .4s ease-in-out;
+  background: #00e676;
+  height: 90vh;
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+}
+
+.place-add.shown {
+  transform: translateY(80vh);
 }

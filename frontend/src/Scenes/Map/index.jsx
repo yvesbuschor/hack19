@@ -4,6 +4,7 @@ import Marker from 'pigeon-marker'
 import './map.css'
 
 import FloatingActionButtons from 'Components/FAB';
+import TransitionBar from 'Components/TransitionBar';
 
 import { useStateValue } from 'state';
 import { fetchLocations } from 'doStuff';
@@ -13,6 +14,7 @@ const MapScene = (props) => {
   const [state, dispatch] = useStateValue();
   const [selectedPlace, setSelectedPlace] = React.useState(null);
   const [mapSpot, setMapSpot] = React.useState(null);
+  const [showContent, setShowContent] = React.useState(null);
 
   const places = state.location.data;
 
@@ -24,15 +26,19 @@ const MapScene = (props) => {
   const handleMarkerClick = (place) => {
     if (mapSpot) {
       setMapSpot(null);
+      setShowContent('NOTHING');
     }
     if (selectedPlace && selectedPlace._id === place._id) {
       setSelectedPlace(null);
+      setShowContent('NOTHING');
     } else {
       setSelectedPlace(place);
+      setShowContent('LITTLE');
     }
   }
 
   const handleMapClick = ({ latLng }) => {
+    setShowContent('NOTHING');
     if (selectedPlace) {
       setSelectedPlace(null);
     } else if (mapSpot) {
@@ -42,10 +48,31 @@ const MapScene = (props) => {
     }
   }
 
+  const handleTransitionBarClick = () => {
+    if(showContent === 'ALL') {
+      setShowContent('LITTLE');
+    } else {
+      setShowContent('ALL');
+    }
+  }
+
+  const show = (content) => {
+    switch(content){
+      case 'ALL':
+        return "place-info shown";
+      case 'LITTLE':
+        return "place-info shown-little ";
+      case 'NOTHING':
+        return "place-info";
+      default:
+        return "place-info";
+    }
+  }
+
 
   return (
     <>
-      <div style={{ height: '100vh', width: '100vw'}}>
+      <div style={{ height: '100vh', width: '100vw', overflow: 'hidden'}}>
         <Map
           center={[47.3892, 8.5153]}
           zoom={15}
@@ -63,10 +90,11 @@ const MapScene = (props) => {
           }
         </Map>
         <FloatingActionButtons />
-        <div className={selectedPlace !== null ? "place-info shown " : "place-info"}>
-          <b>{selectedPlace ? selectedPlace.name : ' '}</b>
+        <div className={show(showContent)}>
+          <TransitionBar onClick={() => handleTransitionBarClick() }/>
+          <div className={"transition-body"}><b>{selectedPlace ? selectedPlace.name : ' '}</b></div>
         </div>
-        <div className={mapSpot !== null ? "place-info shown " : "place-info"}>
+        <div className={mapSpot !== null ? "place-add shown " : "place-info"}>
           <b onClick={() => console.log('could add idea at:', mapSpot)}>Add a change idea here?</b>
         </div>
       </div>
