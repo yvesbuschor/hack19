@@ -1,9 +1,23 @@
 import React from 'react';
+import Map from 'pigeon-maps'
+import Marker from 'pigeon-marker'
 
-const Map = (props) => (
+
+
+const MapScene = (props) => {
+  React.useEffect(() => {
+  }, []);
+  return (
   <>
-    <h1>WIP Map</h1>
+      <div style={{ height: '100vh', width: '100vw'}}>
+        <Map center={[47.3892, 8.5153]} zoom={12}>
+    <Marker anchor={[47.3892, 8.5153]} payload={1} onClick={({ event, anchor, payload }) => {console.log('click marker', { event, anchor, payload })}} />
+  </Map>
+        <div>
+          yoooo
+        </div>
+      </div>
   </>
 );
-
-export default Map;
+}
+export default MapScene;
