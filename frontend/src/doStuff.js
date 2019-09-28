@@ -1,11 +1,11 @@
 import * as db from 'databaseAdapter';
 
-export function fetchIdeas(dispatch) {
+export async function fetchIdeas(dispatch) {
     let action  = {
         type: 'idea.fetching',
     };
     dispatch(action);
-    const ideas = db.getIdeas();
+    const ideas = await db.getIdeas();
     if(ideas !== null){
         action = {
             type: 'idea.changed',
