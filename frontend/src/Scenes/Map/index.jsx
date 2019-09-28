@@ -35,8 +35,7 @@ const MapScene = (props) => {
   const handleMapClick = ({ latLng }) => {
     if (selectedPlace) {
       setSelectedPlace(null);
-    }
-    if (mapSpot) {
+    } else if (mapSpot) {
       setMapSpot(null);
     } else {
       setMapSpot(latLng);
