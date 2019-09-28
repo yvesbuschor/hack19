@@ -173,3 +173,49 @@ export async function downvote(data, dispatch){
   }
   dispatch(action);
 }
+
+export async function upvoteIdea(data, dispatch){
+  let action = {
+    type: 'idea.update'
+  }
+  dispatch(action);
+  const newData = {
+    ...data,
+    upvotes: data.upvotes + 1
+  }
+  const updated = await db.updateEntity(newData);
+  if(updated){
+      action = {
+          type: 'idea.singlechanged',
+          idea: newData
+      }
+  } else {
+      action = {
+          type: 'idea.failed'
+      }
+  }
+  dispatch(action);
+}
+
+export async function downvoteIdea(data, dispatch){
+  let action = {
+    type: 'idea.update'
+  }
+  dispatch(action);
+  const newData = {
+    ...data,
+    downvotes: data.downvotes + 1
+  }
+  const updated = await db.updateEntity(newData);
+  if(updated){
+      action = {
+          type: 'idea.singlechanged',
+          idea: newData
+      }
+  } else {
+      action = {
+          type: 'idea.failed'
+      }
+  }
+  dispatch(action);
+}

@@ -15,6 +15,16 @@ const ideaReducer = (state, action) => {
         data: action.ideas,
         status: 'done'
       };
+
+    case 'idea.singlechanged': {
+      let newArray = state.data.filter((idea) => { return idea._id !== action.idea._id});
+      newArray.push(action.idea);
+      return {
+        ...state,
+        data: newArray,
+        status: 'done'
+      };
+    }
     
     case 'idea.saved':
       return {

@@ -5,14 +5,15 @@ import './map.css'
 
 import FloatingActionButtons from 'Components/FAB';
 import TransitionBar from 'Components/TransitionBar';
+import IdeaCard from 'Components/IdeaCard';
 
 import { useStateValue } from 'state';
-import { fetchLocations } from 'doStuff';
+import { fetchLocations, fetchIdeas } from 'doStuff';
 
 
 const MapScene = (props) => {
   const [state, dispatch] = useStateValue();
-  const [selectedPlace, setSelectedPlace] = React.useState(null);
+  const [selectedPlace, setSelectedPlace] = React.useState({});
   const [mapSpot, setMapSpot] = React.useState(null);
   const [showContent, setShowContent] = React.useState(null);
 
@@ -20,6 +21,7 @@ const MapScene = (props) => {
 
   React.useEffect(() => {
     fetchLocations(dispatch);
+    fetchIdeas(dispatch);
   }, [dispatch]);
 
 
@@ -29,7 +31,7 @@ const MapScene = (props) => {
       setShowContent('NOTHING');
     }
     if (selectedPlace && selectedPlace._id === place._id) {
-      setSelectedPlace(null);
+      setSelectedPlace({});
       setShowContent('NOTHING');
     } else {
       setSelectedPlace(place);
@@ -40,7 +42,7 @@ const MapScene = (props) => {
   const handleMapClick = ({ latLng }) => {
     setShowContent('NOTHING');
     if (selectedPlace) {
-      setSelectedPlace(null);
+      setSelectedPlace({});
     } else if (mapSpot) {
       setMapSpot(null);
     } else {
@@ -91,8 +93,12 @@ const MapScene = (props) => {
         </Map>
         <FloatingActionButtons />
         <div className={show(showContent)}>
-          <TransitionBar onClick={() => handleTransitionBarClick() }/>
-          <div className={"transition-body"}><b>{selectedPlace ? selectedPlace.name : ' '}</b></div>
+          <TransitionBar onClick={() => handleTransitionBarClick() }/> 
+          <div className={"transition-body"}>
+          {console.log(state)}
+          { state.idea.data.filter((idea) => { return idea.location_id === selectedPlace._id })
+          .map((idea) => { return <IdeaCard key={idea._id} idea={idea}/>})}
+          </div>
         </div>
         <div className={mapSpot !== null ? "place-add shown " : "place-info"}>
           <b onClick={() => console.log('could add idea at:', mapSpot)}>Add a change idea here?</b>
