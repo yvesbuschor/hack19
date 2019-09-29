@@ -1,6 +1,6 @@
 import React from 'react';
-import Map from 'pigeon-maps'
-import Marker from 'pigeon-marker'
+import Map from 'pigeon-maps';
+import Marker from 'pigeon-marker';
 import './map.css'
 
 import { Link } from 'react-router-dom';
@@ -35,7 +35,7 @@ const MapScene = (props) => {
       setMapSpot(null);
       setShowContent('NOTHING');
     }
-    if (selectedPlace && selectedPlace._id === place._id) {
+    if (Object.entries(selectedPlace).length > 0 && selectedPlace._id === place._id) {
       setSelectedPlace({});
       setShowContent('NOTHING');
     } else {
@@ -46,7 +46,7 @@ const MapScene = (props) => {
 
   const handleMapClick = ({ latLng }) => {
     setShowContent('NOTHING');
-    if (selectedPlace) {
+    if (Object.entries(selectedPlace).length > 0) {
       setSelectedPlace({});
     } else if (mapSpot) {
       setMapSpot(null);
@@ -82,8 +82,8 @@ const MapScene = (props) => {
       data: {
         lat: lol.lat,
         long: lol.long,
-        location_id: lol._id,
-        preselectedName: lol.name
+        location_id: lol._id || undefined,
+        preselectedName: lol.name || undefined,
       }
     });
   }
@@ -118,12 +118,24 @@ const MapScene = (props) => {
           <Button
             component={Link}
             to={routes.ideaSubmit}
+            variant="contained"
+            color="primary"
             onClick={ () => setLocation(selectedPlace) }
           >Add Idea</Button>
           </div>
         </div>
         <div className={mapSpot !== null ? "place-add shown " : "place-info"}>
-          <b onClick={() => console.log('could add idea at:', mapSpot)}>Add a change idea here?</b>
+          <div style={{display: 'flex', justifyContent: 'center', marginTop: '12px'}}>
+            <Button
+              component={Link}
+              to={routes.ideaSubmit}
+              variant="contained"
+              color="primary"
+              onClick={() => setLocation({lat: mapSpot[0], long: mapSpot[1]})}
+            >
+              Add a change idea here
+            </Button>
+          </div>
         </div>
       </div>
     </>
