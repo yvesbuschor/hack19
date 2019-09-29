@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 const CommentField = ({ idea }) => {
   const classes = useStyles();
-  const [state, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const defaultComment = { user: "Sepp", upvotes: 0, downvotes: 0, idea_id: idea._id, comment: "" };
   const [comment, setComment] = React.useState(defaultComment);
 

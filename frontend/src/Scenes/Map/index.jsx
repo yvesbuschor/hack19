@@ -3,14 +3,13 @@ import Map from 'pigeon-maps'
 import Marker from 'pigeon-marker'
 import './map.css'
 
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import routes from 'routes';
 import Button from '@material-ui/core/Button';
 
 import FloatingActionButtons from 'Components/FAB';
 import TransitionBar from 'Components/TransitionBar';
 import IdeaWrapper from 'Components/IdeaWrapper';
-import LocationCard from 'Components/LocationCard';
 
 import { useStateValue } from 'state';
 import { fetchLocations, fetchIdeas, getComments } from 'doStuff';

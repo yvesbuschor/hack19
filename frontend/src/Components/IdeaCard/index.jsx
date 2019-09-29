@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 
 const IdeaCard = ({ idea, toggleComments }) => {
   const classes = useStyles();
-  const [state, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   return (
     <Card className={classes.card}>

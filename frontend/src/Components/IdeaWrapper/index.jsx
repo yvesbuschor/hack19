@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 
 const IdeaWrapper = ({ idea }) => {
   const classes = useStyles();
-  const [state, dispatch] = useStateValue();
+  const [state] = useStateValue();
   const [showComments, setShowComments] = React.useState(false);  
 
 

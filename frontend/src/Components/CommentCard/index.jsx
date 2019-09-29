@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 
 const CommentCard = ({ comment }) => {
   const classes = useStyles();
-  const [state, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   return (
     <Card className={classes.card}>
