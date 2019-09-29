@@ -86,7 +86,7 @@ const IdeaSubmitView = (props) => {
         <Toolbar>
           <IconButton
             component={Link}
-            to={routes.map}
+            to={routes.landing}
             edge="start"
             className={classes.menuButton}
             color="inherit"

@@ -9,9 +9,7 @@ import routes from 'routes';
 import theme from 'theme';
 import { StateProvider } from 'state';
 
-import LandingScene from 'Scenes/Landing';
 import MapScene from 'Scenes/Map';
-import IdeaDetailScene from 'Scenes/IdeaDetail';
 import IdeaSubmitScene from 'Scenes/IdeaSubmit';
 
 function App() {
@@ -20,9 +18,7 @@ function App() {
       <StateProvider initialState={initialState} reducer={reducer}>
         <CssBaseline />
         <Router>
-          <Route exact path={routes.root} component={LandingScene}/>
-          <Route path={routes.map} component={MapScene}/>
-          <Route path={routes.ideaDetail} component={IdeaDetailScene}/>
+          <Route exact path={routes.root} component={MapScene}/>
           <Route path={routes.ideaSubmit} component={IdeaSubmitScene}/>
         </Router>
       </StateProvider>
