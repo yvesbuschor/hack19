@@ -31,7 +31,7 @@ const ideaReducer = (state, action) => {
       return {
         ...state,
         status: 'done',
-        data: action.idea
+        data: [...state.data, action.idea]
       };
     
     case 'idea.saving':
@@ -122,20 +122,20 @@ const createReducer = (state, action) => {
         data: {...state.data, ...action.data},
       };
     
-    case 'create.submit':
+    case 'idea.save':
       return {
         ...state,
         status: 'pending'
       };
       
-    case 'create.success':
+    case 'idea.saved':
       return {
         ...state,
         status: 'done',
-        data: {},
+        data: {}
       };
     
-    case 'create.failed':
+    case 'idea.failed':
       return {
         ...state,
         status: 'fail'
