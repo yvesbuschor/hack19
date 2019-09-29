@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
   cardContent: {
     paddingTop: '8px',
-    flex: '1 0 auto',
+    flex: '1 1 auto',
   },
   title: {
     fontWeight: 'bold',
