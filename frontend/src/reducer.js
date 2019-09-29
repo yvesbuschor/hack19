@@ -62,11 +62,20 @@ const commentReducer = (state, action) => {
     
     case 'comment.changed':
     case 'comment.saved':
+      let newArray = state.data.filter((comment) => { return comment._id !== action.comment._id});
+      newArray.push(action.comment);
+      return {
+        ...state,
+        status: 'done',
+        data: newArray
+      }
+
+    case 'comment.fetched':
       return {
         ...state,
         status: 'done',
         data: action.comment
-      };
+      }
     
     case 'comment.failed':
       return {

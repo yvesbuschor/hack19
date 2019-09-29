@@ -90,16 +90,16 @@ export async function addComment(data, ideaid, dispatch) {
     dispatch(action);
 }
 
-export async function getComment(commentid, dispatch){
+export async function getComments(dispatch){
     let action = {
         type: 'comment.fetch'
     }
     dispatch(action);
-    const comment = await db.getComment(commentid);
-    if(comment !== null){
+    const comments = await db.getComments();
+    if(comments !== null){
         action = {
-            type: 'comment.changed',
-            comment: comment
+            type: 'comment.fetched',
+            comment: comments
         }
     } else {
         action = {

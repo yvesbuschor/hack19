@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { upvoteIdea, downvoteIdea } from 'doStuff';
+import { upvote, downvote } from 'doStuff';
 import { useStateValue } from 'state';
 
 const useStyles = makeStyles({
@@ -13,6 +13,8 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
+    marginTop: '20px',
+    marginLeft: '20px',
   },
   cardContent: {
     paddingTop: '8px',
@@ -35,28 +37,28 @@ const useStyles = makeStyles({
   },
 });
 
-const IdeaCard = ({ idea, toggleComments }) => {
+const CommentCard = ({ comment }) => {
   const classes = useStyles();
   const [state, dispatch] = useStateValue();
 
   return (
     <Card className={classes.card}>
-      <CardContent className={classes.cardContent} onClick={ toggleComments }>
+      <CardContent className={classes.cardContent}>
         <div className={classes.title}>
-          {idea.title}
+          {comment.user}
         </div>
         <div className={classes.content}>
-          {idea.description}
+          {comment.comment}
         </div>
       </CardContent>
       <div className={classes.actions}>
-        <Button className={classes.button} label="Upvote" onClick={() => upvoteIdea(idea, dispatch)}><ExpandLessIcon /></Button>
-        <div className={classes.counter}>{idea.upvotes - idea.downvotes}</div>
-        <Button className={classes.button} label="Downvote" onClick={() => downvoteIdea(idea, dispatch)}><ExpandMoreIcon /></Button>
+        <Button className={classes.button} label="Upvote" onClick={() => upvote(comment, dispatch)}><ExpandLessIcon /></Button>
+        <div className={classes.counter}>{comment.upvotes - comment.downvotes}</div>
+        <Button className={classes.button} label="Downvote" onClick={() => downvote(comment, dispatch)}><ExpandMoreIcon /></Button>
       </div>
     </Card>
   );
 }
 
 
-export default props => <IdeaCard {...props}/>;
+export default props => <CommentCard {...props}/>;

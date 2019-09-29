@@ -5,11 +5,11 @@ import './map.css'
 
 import FloatingActionButtons from 'Components/FAB';
 import TransitionBar from 'Components/TransitionBar';
-import IdeaCard from 'Components/IdeaCard';
+import IdeaWrapper from 'Components/IdeaWrapper';
 import LocationCard from 'Components/LocationCard';
 
 import { useStateValue } from 'state';
-import { fetchLocations, fetchIdeas } from 'doStuff';
+import { fetchLocations, fetchIdeas, getComments } from 'doStuff';
 
 
 const MapScene = (props) => {
@@ -23,6 +23,7 @@ const MapScene = (props) => {
   React.useEffect(() => {
     fetchLocations(dispatch);
     fetchIdeas(dispatch);
+    getComments(dispatch);  
   }, [dispatch]);
 
 
@@ -99,7 +100,7 @@ const MapScene = (props) => {
           <p className={"location"}>{selectedPlace.name}</p>
           { state.idea.data.filter((idea) => { return idea.location_id === selectedPlace._id })
           .sort((left, right) => { return left._createdOn < right._createdOn})
-          .map((idea) => { return <IdeaCard key={idea._id} idea={idea}/>})}
+          .map((idea) => { return <IdeaWrapper key={idea._id} idea={idea}/>})}
           </div>
         </div>
         <div className={mapSpot !== null ? "place-add shown " : "place-info"}>

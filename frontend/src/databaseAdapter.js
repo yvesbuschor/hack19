@@ -76,9 +76,9 @@ export async function addComment(data){
     }
 }
 
-export async function getComments(idea_id){
+export async function getComments(){
     try {
-        const response = await instance.get('/comment?q=idea_id:' + idea_id);
+        const response = await instance.get('/comment');
         if(response.status === 200){
             return response.data;
         }
