@@ -132,7 +132,7 @@ const IdeaSubmitView = (props) => {
           margin="normal"
           multiline
           rows="3"
-          calue={createData.description || ''}
+          value={createData.description || ''}
           onChange={updateFormData('description')}
         />
         <TextField
