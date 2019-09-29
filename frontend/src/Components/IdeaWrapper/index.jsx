@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import IdeaCard from 'Components/IdeaCard';
 import CommentCard from 'Components/CommentCard';
+import CommentField from 'Components/CommentField';
 import { useStateValue } from 'state';
 
 const useStyles = makeStyles({
@@ -30,7 +31,14 @@ const IdeaWrapper = ({ idea }) => {
                   .sort((left, right) => { return left._createdOn < right._createdOn})
                   .map((comment) => { return <CommentCard key={comment._id} comment={comment}/>})
                 }
-            </>)}
+            </>)
+        }
+        { showComments && (
+          <>
+            <CommentField idea={idea}/>
+          </>)
+        }
+
     </div>
   );
 }

@@ -3,6 +3,10 @@ import Map from 'pigeon-maps'
 import Marker from 'pigeon-marker'
 import './map.css'
 
+import { Link, withRouter } from 'react-router-dom';
+import routes from 'routes';
+import Button from '@material-ui/core/Button';
+
 import FloatingActionButtons from 'Components/FAB';
 import TransitionBar from 'Components/TransitionBar';
 import IdeaWrapper from 'Components/IdeaWrapper';
@@ -73,6 +77,17 @@ const MapScene = (props) => {
     }
   }
 
+  const setLocation = (lol) => {
+    dispatch({
+      type: 'create.dataUpdated',
+      data: {
+        lat: lol.lat,
+        long: lol.long,
+        location_id: lol._id,
+        preselectedName: lol.name
+      }
+    });
+  }
 
   return (
     <>
@@ -101,6 +116,11 @@ const MapScene = (props) => {
           { state.idea.data.filter((idea) => { return idea.location_id === selectedPlace._id })
           .sort((left, right) => { return left._createdOn < right._createdOn})
           .map((idea) => { return <IdeaWrapper key={idea._id} idea={idea}/>})}
+          <Button
+            component={Link}
+            to={routes.ideaSubmit}
+            onClick={ () => setLocation(selectedPlace) }
+          >Add Idea</Button>
           </div>
         </div>
         <div className={mapSpot !== null ? "place-add shown " : "place-info"}>
