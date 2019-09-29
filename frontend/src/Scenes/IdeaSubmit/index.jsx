@@ -47,8 +47,6 @@ const IdeaSubmitView = (props) => {
   const createData = state.create.data;
   const createStatus = state.create.status;
 
-  console.log({state, createData});
-
   const updateFormData = (formKey) => (event) => {
     dispatch({
       type: 'create.dataUpdated',
